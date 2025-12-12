@@ -8,11 +8,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * Компонент PointsPanel из ЛБ3.
- * Отображает точки на координатной плоскости.
- * Реализует интерфейс Observer для получения данных.
- */
 public class PointsPanel extends JPanel implements PointsPanelObserver {
     private final List<Point2D.Double> points;
     private final int maxPoints;
