@@ -9,26 +9,11 @@ import javax.swing.SwingUtilities;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/**
- * Класс-контроллер, реализующий физическую модель грузика на пружине.
- * Работает в отдельном потоке и уведомляет подписчиков об изменениях состояния.
- * 
- * Физическая модель:
- * - Грузик раскачивается и колеблется на пружине
- * - На грузик действует сила пружины (сжатие/растяжение)
- * - На грузик действует сила тяжести
- * - Проекция m*g*sin(fi) вызывает угловое ускорение
- * - Проекция m*g*cos(fi) складывается с силой пружины
- */
 public class PhysicsController implements SimulationCommands, Runnable {
-    
-    // Список наблюдателей (потокобезопасный)
+
     private final List<SimulationObserver> observers = new CopyOnWriteArrayList<>();
-    
-    // Параметры симуляции
     private SimulationParameters parameters;
     
-    // Текущее состояние
     private double time;
     private double angle;           // fi - угол отклонения от вертикали
     private double angularVelocity; // d(fi)/dt

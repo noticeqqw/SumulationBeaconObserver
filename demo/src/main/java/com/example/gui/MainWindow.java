@@ -21,10 +21,8 @@ public class MainWindow extends JFrame implements SimulationObserver {
     
     public MainWindow(SimulationCommands controller) {
         this.controller = controller;
-        
-        setTitle("Физическая модель: Грузик на пружине");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1100, 750);
+        setSize(700, 550);
         setLocationRelativeTo(null);
         
         // Главная панель
@@ -81,7 +79,7 @@ public class MainWindow extends JFrame implements SimulationObserver {
         panel.add(Box.createVerticalStrut(10));
         
         // === Настройки симуляции ===
-        JButton settingsButton = new JButton("⚙ Настройки параметров...");
+        JButton settingsButton = new JButton("⚙ Настройки параметров");
         settingsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         settingsButton.addActionListener(e -> openSettingsWindow());
         panel.add(settingsButton);
@@ -92,21 +90,26 @@ public class MainWindow extends JFrame implements SimulationObserver {
         JPanel subscribePanel = new JPanel();
         subscribePanel.setLayout(new BoxLayout(subscribePanel, BoxLayout.Y_AXIS));
         subscribePanel.setBorder(BorderFactory.createTitledBorder("📊 Подписка на параметр"));
+        subscribePanel.setMaximumSize(new Dimension(200, 200));
         
-        JPanel paramPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        paramPanel.add(new JLabel("Параметр:"));
+        subscribePanel.add(Box.createVerticalStrut(5));
+        
+        subscribePanel.add(new JLabel("Параметр:"));
         JComboBox<String> paramSelector = new JComboBox<>(PhysicsState.getAvailableParameters());
-        paramPanel.add(paramSelector);
-        subscribePanel.add(paramPanel);
+        paramSelector.setMaximumSize(new Dimension(180, 25));
+        subscribePanel.add(paramSelector);
         
-        JPanel typePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        typePanel.add(new JLabel("Тип графика:"));
+        subscribePanel.add(Box.createVerticalStrut(8));
+        
+        subscribePanel.add(new JLabel("Тип графика:"));
         JComboBox<String> typeSelector = new JComboBox<>(new String[] {
             "JFreeChart график",
             "PointsPanel (ЛБ3)"
         });
-        typePanel.add(typeSelector);
-        subscribePanel.add(typePanel);
+        typeSelector.setMaximumSize(new Dimension(180, 25));
+        subscribePanel.add(typeSelector);
+        
+        subscribePanel.add(Box.createVerticalStrut(10));
         
         JButton subscribeButton = new JButton("📈 Подписаться");
         subscribeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
