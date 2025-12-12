@@ -1,8 +1,5 @@
 package com.example.model;
 
-/**
- * Параметры симуляции физической модели грузика на пружине.
- */
 public class SimulationParameters {
     private double mass;              // Масса грузика (кг)
     private double springConstant;    // Жесткость пружины (Н/м)
@@ -13,17 +10,15 @@ public class SimulationParameters {
     private double gravity;           // Ускорение свободного падения (м/с²)
 
     public SimulationParameters() {
-        // Значения по умолчанию
         this.mass = 1.0;
         this.springConstant = 50.0;
         this.naturalLength = 1.0;
         this.initialLength = 1.5;
-        this.initialAngle = Math.PI / 6; // 30 градусов
+        this.initialAngle = Math.PI / 6;
         this.damping = 0.1;
         this.gravity = 9.81;
     }
 
-    // Copy constructor
     public SimulationParameters(SimulationParameters other) {
         this.mass = other.mass;
         this.springConstant = other.springConstant;
@@ -34,7 +29,6 @@ public class SimulationParameters {
         this.gravity = other.gravity;
     }
 
-    // Getters
     public double getMass() { return mass; }
     public double getSpringConstant() { return springConstant; }
     public double getNaturalLength() { return naturalLength; }
@@ -43,7 +37,6 @@ public class SimulationParameters {
     public double getDamping() { return damping; }
     public double getGravity() { return gravity; }
 
-    // Setters
     public void setMass(double mass) { this.mass = mass; }
     public void setSpringConstant(double springConstant) { this.springConstant = springConstant; }
     public void setNaturalLength(double naturalLength) { this.naturalLength = naturalLength; }

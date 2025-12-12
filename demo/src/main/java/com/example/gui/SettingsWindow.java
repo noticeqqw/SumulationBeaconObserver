@@ -6,9 +6,6 @@ import com.example.observer.SimulationCommands;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Окно настроек параметров симуляции.
- */
 public class SettingsWindow extends JDialog {
     
     private final SimulationCommands controller;
@@ -37,7 +34,6 @@ public class SettingsWindow extends JDialog {
         JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
         
-        // Панель параметров
         JPanel paramsPanel = new JPanel(new GridBagLayout());
         paramsPanel.setBorder(BorderFactory.createTitledBorder("📋 Параметры физической модели"));
         
@@ -45,7 +41,6 @@ public class SettingsWindow extends JDialog {
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.anchor = GridBagConstraints.WEST;
         
-        // Масса грузика
         gbc.gridx = 0; gbc.gridy = 0;
         paramsPanel.add(new JLabel("Масса грузика (кг):"), gbc);
         gbc.gridx = 1;
@@ -53,7 +48,6 @@ public class SettingsWindow extends JDialog {
         massSpinner.setPreferredSize(new Dimension(100, 25));
         paramsPanel.add(massSpinner, gbc);
         
-        // Жёсткость пружины
         gbc.gridx = 0; gbc.gridy = 1;
         paramsPanel.add(new JLabel("Жёсткость пружины (Н/м):"), gbc);
         gbc.gridx = 1;
@@ -61,7 +55,6 @@ public class SettingsWindow extends JDialog {
         springConstantSpinner.setPreferredSize(new Dimension(100, 25));
         paramsPanel.add(springConstantSpinner, gbc);
         
-        // Естественная длина пружины
         gbc.gridx = 0; gbc.gridy = 2;
         paramsPanel.add(new JLabel("Естественная длина R₀ (м):"), gbc);
         gbc.gridx = 1;
@@ -69,7 +62,6 @@ public class SettingsWindow extends JDialog {
         naturalLengthSpinner.setPreferredSize(new Dimension(100, 25));
         paramsPanel.add(naturalLengthSpinner, gbc);
         
-        // Начальная длина пружины
         gbc.gridx = 0; gbc.gridy = 3;
         paramsPanel.add(new JLabel("Начальная длина R (м):"), gbc);
         gbc.gridx = 1;
@@ -77,7 +69,6 @@ public class SettingsWindow extends JDialog {
         initialLengthSpinner.setPreferredSize(new Dimension(100, 25));
         paramsPanel.add(initialLengthSpinner, gbc);
         
-        // Начальный угол
         gbc.gridx = 0; gbc.gridy = 4;
         paramsPanel.add(new JLabel("Начальный угол (градусы):"), gbc);
         gbc.gridx = 1;
@@ -85,7 +76,6 @@ public class SettingsWindow extends JDialog {
         initialAngleSpinner.setPreferredSize(new Dimension(100, 25));
         paramsPanel.add(initialAngleSpinner, gbc);
         
-        // Коэффициент затухания
         gbc.gridx = 0; gbc.gridy = 5;
         paramsPanel.add(new JLabel("Коэффициент затухания:"), gbc);
         gbc.gridx = 1;
@@ -93,7 +83,6 @@ public class SettingsWindow extends JDialog {
         dampingSpinner.setPreferredSize(new Dimension(100, 25));
         paramsPanel.add(dampingSpinner, gbc);
         
-        // Ускорение свободного падения
         gbc.gridx = 0; gbc.gridy = 6;
         paramsPanel.add(new JLabel("Ускорение g (м/с²):"), gbc);
         gbc.gridx = 1;
@@ -103,7 +92,6 @@ public class SettingsWindow extends JDialog {
         
         mainPanel.add(paramsPanel, BorderLayout.CENTER);
         
-        // Кнопки
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         
         JButton applyButton = new JButton("✅ Применить");

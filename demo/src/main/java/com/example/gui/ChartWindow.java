@@ -18,9 +18,6 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-/**
- * Окно с графиком параметра на основе JFreeChart.
- */
 public class ChartWindow extends JFrame implements SimulationObserver {
     
     private final String parameterName;
@@ -38,10 +35,8 @@ public class ChartWindow extends JFrame implements SimulationObserver {
         
         initChart();
         
-        // Подписка на контроллер
         controller.subscribe(this);
         
-        // Отписка при закрытии окна
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -51,11 +46,9 @@ public class ChartWindow extends JFrame implements SimulationObserver {
     }
     
     private void initChart() {
-        // Создание серии данных
         series = new XYSeries(parameterName);
         XYSeriesCollection dataset = new XYSeriesCollection(series);
         
-        // Создание графика
         JFreeChart chart = ChartFactory.createXYLineChart(
             parameterName,
             "Время (с)",
@@ -67,7 +60,6 @@ public class ChartWindow extends JFrame implements SimulationObserver {
             false
         );
         
-        // Настройка внешнего вида
         XYPlot plot = chart.getXYPlot();
         plot.setBackgroundPaint(Color.WHITE);
         plot.setDomainGridlinePaint(Color.LIGHT_GRAY);
@@ -79,19 +71,16 @@ public class ChartWindow extends JFrame implements SimulationObserver {
         renderer.setSeriesShapesVisible(0, false);
         plot.setRenderer(renderer);
         
-        // Панель графика
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(580, 350));
         chartPanel.setMouseWheelEnabled(true);
         
-        // Панель управления
         JPanel controlPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         
         JButton clearButton = new JButton("🗑 Очистить");
         clearButton.addActionListener(e -> series.clear());
         controlPanel.add(clearButton);
         
-        // Компоновка
         setLayout(new BorderLayout());
         add(chartPanel, BorderLayout.CENTER);
         add(controlPanel, BorderLayout.SOUTH);

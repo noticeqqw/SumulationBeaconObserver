@@ -25,26 +25,21 @@ public class MainWindow extends JFrame implements SimulationObserver {
         setSize(700, 550);
         setLocationRelativeTo(null);
         
-        // Главная панель
         JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         
-        // Панель симуляции
         simulationPanel = new SimulationPanel();
         simulationPanel.setPreferredSize(new Dimension(600, 500));
         simulationPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
         mainPanel.add(simulationPanel, BorderLayout.CENTER);
         
-        // Панель управления справа
         JPanel controlPanel = createControlPanel();
         mainPanel.add(controlPanel, BorderLayout.EAST);
         
         add(mainPanel);
         
-        // Подписка на контроллер
         controller.subscribe(this);
         
-        // Обработка закрытия окна
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -59,7 +54,6 @@ public class MainWindow extends JFrame implements SimulationObserver {
         panel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 5));
         panel.setPreferredSize(new Dimension(300, 0));
         
-        // === Кнопки управления ===
         JPanel buttonPanel = new JPanel(new GridLayout(3, 1, 5, 5));
         buttonPanel.setBorder(BorderFactory.createTitledBorder("🎮 Управление"));
         
@@ -78,7 +72,6 @@ public class MainWindow extends JFrame implements SimulationObserver {
         panel.add(buttonPanel);
         panel.add(Box.createVerticalStrut(10));
         
-        // === Настройки симуляции ===
         JButton settingsButton = new JButton("⚙ Настройки параметров");
         settingsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         settingsButton.addActionListener(e -> openSettingsWindow());
@@ -86,7 +79,6 @@ public class MainWindow extends JFrame implements SimulationObserver {
         
         panel.add(Box.createVerticalStrut(20));
         
-        // === Подписка на параметры ===
         JPanel subscribePanel = new JPanel();
         subscribePanel.setLayout(new BoxLayout(subscribePanel, BoxLayout.Y_AXIS));
         subscribePanel.setBorder(BorderFactory.createTitledBorder("📊 Подписка на параметр"));
@@ -124,7 +116,6 @@ public class MainWindow extends JFrame implements SimulationObserver {
         
         panel.add(Box.createVerticalStrut(20));
         
-        // === Скорость симуляции ===
         JPanel speedPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         speedPanel.setBorder(BorderFactory.createTitledBorder("⚡ Скорость"));
         speedPanel.add(new JLabel("Множитель:"));
@@ -159,8 +150,6 @@ public class MainWindow extends JFrame implements SimulationObserver {
         }
     }
     
-    // === Реализация SimulationObserver ===
-    
     @Override
     public void onStateUpdate(PhysicsState state) {
         simulationPanel.setState(state);
@@ -179,9 +168,6 @@ public class MainWindow extends JFrame implements SimulationObserver {
     public void onSimulationReset() {
     }
     
-    /**
-     * Внутренний класс для отрисовки симуляции
-     */
     private static class SimulationPanel extends JPanel {
         private PhysicsState state;
         private static final int SCALE = 150;
@@ -199,11 +185,9 @@ public class MainWindow extends JFrame implements SimulationObserver {
             int centerX = getWidth() / 2;
             int pivotY = 50;
             
-            // Фон
             g2d.setColor(new Color(240, 248, 255));
             g2d.fillRect(0, 0, getWidth(), getHeight());
             
-            // Точка подвеса
             g2d.setColor(Color.DARK_GRAY);
             g2d.fillRect(centerX - 30, pivotY - 10, 60, 10);
             
@@ -214,14 +198,11 @@ public class MainWindow extends JFrame implements SimulationObserver {
                 return;
             }
             
-            // Координаты грузика в пикселях
             int massX = centerX + (int) (state.getX() * SCALE);
             int massY = pivotY + (int) (state.getY() * SCALE);
             
-            // Рисуем пружину
             drawSpring(g2d, centerX, pivotY, massX, massY, 15);
             
-            // Рисуем грузик
             int massRadius = 20;
             g2d.setColor(Color.RED);
             g2d.fill(new Ellipse2D.Double(massX - massRadius, massY - massRadius, 

@@ -1,9 +1,5 @@
 package com.example.model;
 
-/**
- * Класс, представляющий текущее состояние физической системы.
- * Содержит все параметры, за которыми можно наблюдать.
- */
 public class PhysicsState {
     private double time;           // Время симуляции (с)
     private double angle;          // Угол отклонения fi (рад)
@@ -36,7 +32,6 @@ public class PhysicsState {
         this.acceleration = acceleration;
     }
 
-    // Getters
     public double getTime() { return time; }
     public double getAngle() { return angle; }
     public double getAngularVelocity() { return angularVelocity; }
@@ -49,7 +44,6 @@ public class PhysicsState {
     public double getGravityForce() { return gravityForce; }
     public double getAcceleration() { return acceleration; }
 
-    // Setters
     public void setTime(double time) { this.time = time; }
     public void setAngle(double angle) { this.angle = angle; }
     public void setAngularVelocity(double angularVelocity) { this.angularVelocity = angularVelocity; }
@@ -62,9 +56,6 @@ public class PhysicsState {
     public void setGravityForce(double gravityForce) { this.gravityForce = gravityForce; }
     public void setAcceleration(double acceleration) { this.acceleration = acceleration; }
 
-    /**
-     * Получить значение параметра по имени
-     */
     public double getParameter(String parameterName) {
         return switch (parameterName) {
             case "Время (с)" -> time;
@@ -82,9 +73,6 @@ public class PhysicsState {
         };
     }
 
-    /**
-     * Список всех доступных параметров для наблюдения
-     */
     public static String[] getAvailableParameters() {
         return new String[] {
             "Угол (рад)",

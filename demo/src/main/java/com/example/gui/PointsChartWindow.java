@@ -10,15 +10,11 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-/**
- * Окно с компонентом PointsPanel из ЛБ3 для отображения точек.
- */
 public class PointsChartWindow extends JFrame implements SimulationObserver {
     
     private final String parameterName;
     private final PointsPanel pointsPanel;
     
-    // Для автоматического масштабирования
     private double minTime = 0, maxTime = 10;
     private double minValue = -5, maxValue = 5;
     private boolean autoScale = true;
@@ -31,10 +27,8 @@ public class PointsChartWindow extends JFrame implements SimulationObserver {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
-        // Создание компонента PointsPanel из ЛБ3
         pointsPanel = new PointsPanel(550, 350, minTime, maxTime, minValue, maxValue, 500);
         
-        // Панель управления
         JPanel controlPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
         
         JButton clearButton = new JButton("🗑 Очистить");
@@ -58,22 +52,18 @@ public class PointsChartWindow extends JFrame implements SimulationObserver {
         });
         controlPanel.add(colorSelector);
         
-        // Заголовок
         JPanel headerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JLabel titleLabel = new JLabel("📊 Компонент PointsPanel из ЛБ3: " + parameterName);
         titleLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
         headerPanel.add(titleLabel);
         
-        // Компоновка
         setLayout(new BorderLayout(5, 5));
         add(headerPanel, BorderLayout.NORTH);
         add(pointsPanel, BorderLayout.CENTER);
         add(controlPanel, BorderLayout.SOUTH);
         
-        // Подписка на контроллер
         controller.subscribe(this);
         
-        // Отписка при закрытии
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -86,8 +76,7 @@ public class PointsChartWindow extends JFrame implements SimulationObserver {
     public void onStateUpdate(PhysicsState state) {
         double value = state.getParameter(parameterName);
         double time = state.getTime();
-        
-        // Автоматическое масштабирование диапазона
+    
         if (autoScale) {
             boolean rangeChanged = false;
             
@@ -111,7 +100,6 @@ public class PointsChartWindow extends JFrame implements SimulationObserver {
             }
         }
         
-        // Добавление точки через метод update (Observer паттерн из ЛБ3)
         pointsPanel.update(time, value);
     }
     
