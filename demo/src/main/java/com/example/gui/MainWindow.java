@@ -61,7 +61,7 @@ public class MainWindow extends JFrame implements SimulationObserver {
         start.addActionListener(e -> controller.start());
         buttonPanel.add(start);
         
-        JButton stop = new JButton("⏹ Стоп");
+        JButton stop = new JButton("⏸ Стоп");
         stop.addActionListener(e -> controller.stop());
         buttonPanel.add(stop);
         
