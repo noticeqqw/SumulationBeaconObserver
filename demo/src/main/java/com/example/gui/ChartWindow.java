@@ -23,6 +23,7 @@ public class ChartWindow extends JFrame implements SimulationObserver {
     private final String parameterName;
     
     private XYSeries series;
+    private XYLineAndShapeRenderer renderer;
     private static final int MAX_POINTS = 500;
     
     public ChartWindow(SimulationCommands controller, String parameterName) {
@@ -80,6 +81,22 @@ public class ChartWindow extends JFrame implements SimulationObserver {
         JButton clearButton = new JButton("🗑 Очистить");
         clearButton.addActionListener(e -> series.clear());
         controlPanel.add(clearButton);
+
+        controlPanel.add(new JLabel("🎨 Цвет:"));
+        JComboBox<String> colorSelector = new JComboBox<>(new String[]{"Синий", "Красный", "Зелёный", "Оранжевый"});
+        colorSelector.addActionListener(e -> {
+            Color[] colors = {
+                new Color(0, 120, 215),
+                Color.RED,
+                new Color(0, 150, 0),
+                Color.ORANGE
+            };
+            renderer.setSeriesPaint(0, colors[colorSelector.getSelectedIndex()]);
+            XYPlot plot1 = (XYPlot) chartPanel.getChart().getPlot();
+            plot1.setRenderer(renderer);
+            chartPanel.repaint();
+        });
+        controlPanel.add(colorSelector);
         
         setLayout(new BorderLayout());
         add(chartPanel, BorderLayout.CENTER);
